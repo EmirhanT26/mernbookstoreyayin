@@ -1,43 +1,69 @@
 "use client";
-
 import Link from "next/link";
-import Image from "next/image";
 import { Carousel } from "flowbite-react";
 import { books } from "./consts/books";
 
 const Page = () => {
   return (
     <div className="flex flex-col">
+
       {/* Carousel */}
       <div className="relative mt-6 px-4 sm:px-6 md:px-8 lg:px-10">
         <Carousel>
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="relative">
-              <Image
-                src="/images/banner.png"
-                alt="Banner"
-                width={1200}
-                height={400}
-                className="w-full h-auto sm:h-64 md:h-80 lg:h-96 object-cover"
-                priority={i === 0} // İlk görsel öncelikli yüklenir
-              />
-              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-center text-white bg-black bg-opacity-50">
-                <div>
-                  <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-amber-500">
-                    {i === 0 && "25% discount"}
-                    {i === 1 && "Farklı bir kampanya!"}
-                    {i === 2 && "Son kampanya!"}
-                  </span>
-                  <br />
-                  <span className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold">
-                    {i === 0 && "all Paulo Coelho books!"}
-                    {i === 1 && "Daha fazla kitap keşfedin!"}
-                    {i === 2 && "En sevdiğiniz yazarlar burada!"}
-                  </span>
-                </div>
+          <div className="relative">
+            <img
+              src="/images/banner.png"
+              alt="..."
+              className="w-full h-auto sm:h-64 md:h-80 lg:h-96 object-cover"
+            />
+            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-center text-white bg-black bg-opacity-50">
+              <div>
+                <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-amber-500">
+                  25% discount
+                </span>
+                <br />
+                <span className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold">
+                  all Paulo Coelho books!
+                </span>
               </div>
             </div>
-          ))}
+          </div>
+          <div className="relative">
+            <img
+              src="/images/banner.png"
+              alt="..."
+              className="w-full h-auto sm:h-64 md:h-80 lg:h-96 object-cover"
+            />
+            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-center text-white bg-black bg-opacity-50">
+              <div>
+                <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-amber-500">
+                  Farklı bir kampanya!
+                </span>
+                <br />
+                <span className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold">
+                  Daha fazla kitap keşfedin!
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="relative">
+            <img
+              src="/images/banner.png"
+              alt="..."
+              className="w-full h-auto sm:h-64 md:h-80 lg:h-96 object-cover"
+            />
+            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-center text-white bg-black bg-opacity-50">
+              <div>
+                <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-amber-500">
+                  Son kampanya!
+                </span>
+                <br />
+                <span className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold">
+                  En sevdiğiniz yazarlar burada!
+                </span>
+              </div>
+            </div>
+          </div>
         </Carousel>
       </div>
 
@@ -48,7 +74,10 @@ const Page = () => {
             <div className="flex justify-between items-center mb-4">
               <span className="text-2xl font-bold">{category.category}</span>
               <Link
-                href={`/category/${encodeURIComponent(category.category.toLowerCase())}`}
+                href={{
+                  pathname: '/category',
+                  query: { categoryId: category.categoryId },
+                }}
                 className="text-orange-500 text-base font-semibold"
               >
                 View All
@@ -62,13 +91,10 @@ const Page = () => {
                   className="flex flex-col sm:flex-row bg-violet-100 border border-gray-200 rounded-lg overflow-hidden"
                 >
                   <div className="w-full sm:w-1/3">
-                    <Image
+                    <img
                       src={book.img}
                       alt={book.name}
-                      width={200}
-                      height={300}
-                      className="object-cover"
-                      priority={false}
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="flex flex-col justify-between p-4 sm:w-2/3">

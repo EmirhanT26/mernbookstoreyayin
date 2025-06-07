@@ -1,5 +1,6 @@
-import { notFound } from "next/navigation";
-import Image from "next/image";
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+
 
 const books = [
   {
@@ -31,40 +32,24 @@ const books = [
   },
 ];
 
-// Sayfa fonksiyonu - dinamik route parametresi alır
-interface CategoryPageProps {
-  params: {
-    category: string | string[];
-  };
-}
+const CategoryPage = () => {
+  const router = useRouter();
+  const { category } = router.query;
 
-const CategoryPage = ({ params }: CategoryPageProps) => {
-  // string[] gelirse ilk elemanı al, değilse direkt kullan
-  const rawCategory = Array.isArray(params.category) ? params.category[0] : params.category;
+  // Kategoriyi bul
+  const categoryData = books.find(cat => cat.category === category);
 
-  // Veriyi normalize edip eşle
-  const categoryData = books.find(
-    (cat) => cat.category.toLowerCase() === rawCategory.toLowerCase()
-  );
-
-  // Eğer kategori bulunmazsa 404 göster
-  if (!categoryData) return notFound();
+  if (!categoryData) {
+    return <p>Kategori bulunamadı.</p>;
+  }
 
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-10">
       <h1 className="text-3xl font-bold mb-4">{categoryData.category} Books</h1>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4">
         {categoryData.items.map((book) => (
-          <div key={book.id} className="bg-violet-100 p-4 rounded-md shadow-md">
-            <div className="w-full h-48 relative mb-2">
-              <Image
-                src={book.img}
-                alt={book.name}
-                layout="fill"
-                objectFit="cover"
-                className="rounded"
-              />
-            </div>
+          <div key={book.id} className="bg-violet-100 p-4 rounded-md">
+            <img src={book.img} alt={book.name} className="w-full h-48 object-cover mb-2" />
             <h5 className="text-lg font-bold">{book.name}</h5>
             <p className="text-sm text-gray-700">{book.author}</p>
             <p className="font-bold text-purple-600 mt-2">{book.price} $</p>
