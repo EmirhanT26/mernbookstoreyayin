@@ -1,7 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
 
 type Book = {
   id: number;
@@ -46,15 +44,16 @@ const books: Category[] = [
   },
 ];
 
-const CategoryPage = () => {
-  const params = useParams();
+type Props = {
+  params: {
+    category: string;
+  };
+};
+
+const CategoryPage = ({ params }: Props) => {
   const category = params.category;
 
-  if (typeof category !== 'string') {
-    return <p>Geçersiz kategori.</p>;
-  }
-
-  const categoryData = books.find(cat => cat.category === category);
+  const categoryData = books.find(cat => cat.category.toLowerCase() === category.toLowerCase());
 
   if (!categoryData) {
     return <p>Kategori bulunamadı.</p>;
@@ -72,6 +71,7 @@ const CategoryPage = () => {
               width={300}
               height={200}
               className="mb-2 rounded-md object-cover"
+              priority={false}
             />
             <h5 className="text-lg font-bold">{book.name}</h5>
             <p className="text-sm text-gray-700">{book.author}</p>
