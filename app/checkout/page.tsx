@@ -14,10 +14,9 @@ const Checkout = () => {
     }
   };
 
-  const price = 29.99; // Sabit fiyat
-  const totalPrice = (price * quantity).toFixed(2); // Toplam fiyat hesaplanıyor
+  const price = 29.99;
+  const totalPrice = (price * quantity).toFixed(2);
 
-  // SweetAlert2 popup işlevi
   const showAlert = () => {
     Swal.fire({
       title: 'Ön Bilgilendirme Koşulları ve Mesafeli Satış Sözleşmesi',
@@ -35,10 +34,12 @@ const Checkout = () => {
           <div className="bg-violet-100 rounded-xl p-4 mb-4 flex flex-col md:flex-row items-center relative">
             <LuX className="absolute top-2 right-2 text-2xl text-gray-500 cursor-pointer" />
             <Image
- src="images/matilda.png" 
-  alt="Kitap Resmi" 
-className="w-full md:w-24 h-32 object-cover rounded-md mb-4 md:mb-0" 
-/>
+              src="/images/matilda.png"
+              alt="Kitap Resmi"
+              width={96}
+              height={128}
+              className="w-full md:w-24 h-32 object-cover rounded-md mb-4 md:mb-0"
+            />
             <div className="flex-1 ml-0 md:ml-4">
               <h3 className="text-xl font-semibold text-black">Kitap ismi</h3>
               <p className="text-gray-700">Yazarın İsmi</p>
@@ -62,11 +63,9 @@ className="w-full md:w-24 h-32 object-cover rounded-md mb-4 md:mb-0"
               <span className="text-xl font-bold text-black">₺{totalPrice}</span>
             </div>
           </div>
-
-          {/* Diğer Kitap Kartları buraya eklenebilir */}
         </div>
 
-        {/* Sağ Taraf: Sipariş Özeti (Sticky) */}
+        {/* Sağ Taraf: Sipariş Özeti */}
         <div className="md:w-1/4 flex-shrink-0 sticky top-20">
           <div className="bg-violet-100 rounded-xl shadow-lg p-4">
             <h4 className="text-xl font-semibold text-black mb-2">Sipariş Özeti</h4>
@@ -75,13 +74,13 @@ className="w-full md:w-24 h-32 object-cover rounded-md mb-4 md:mb-0"
               <span className="text-lg font-bold text-black">₺{totalPrice}</span>
             </div>
 
-            {/* Teslimat Ücreti Bilgisi */}
+            {/* Teslimat Ücreti */}
             <div className="flex justify-between items-center mb-4">
               <span className="text-sm text-gray-700">Teslimat Ücreti</span>
               <span className="text-sm font-semibold text-purple-600">Ücretsiz!</span>
             </div>
 
-            {/* Checkbox ve Yazı */}
+            {/* Checkbox Alanları */}
             <div className="flex flex-col mb-4 space-y-2">
               <div className="flex items-center">
                 <input type="checkbox" id="checkbox1" className="mr-2" />
@@ -90,7 +89,7 @@ className="w-full md:w-24 h-32 object-cover rounded-md mb-4 md:mb-0"
                   className="text-sm text-gray-700 underline cursor-pointer"
                   onClick={showAlert}
                 >
-                  Ön Bilgilendirme Koşullarını ve Mesafeli Satış Sözleşmesi'ni okudum, onaylıyorum.
+                  Ön Bilgilendirme Koşulları ve Mesafeli Satış Sözleşmesi&apos;ni okudum, onaylıyorum.
                 </label>
               </div>
               <div className="flex items-center">
