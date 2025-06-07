@@ -1,6 +1,7 @@
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+'use client';
 
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
 
 const books = [
   {
@@ -33,11 +34,13 @@ const books = [
 ];
 
 const CategoryPage = () => {
-  const router = useRouter();
-  const { category } = router.query;
+  const params = useParams();
+  const categoryValue = Array.isArray(params.category) ? params.category[0] : params.category;
+  const categoryParam = decodeURIComponent(categoryValue); // URL'den geliyor
 
-  // Kategoriyi bul
-  const categoryData = books.find(cat => cat.category === category);
+  const categoryData = books.find(
+    (cat) => cat.category.toLowerCase() === categoryParam.toLowerCase()
+  );
 
   if (!categoryData) {
     return <p>Kategori bulunamadı.</p>;
@@ -56,6 +59,9 @@ const CategoryPage = () => {
           </div>
         ))}
       </div>
+      <Link href="/" className="block mt-6 text-blue-600 hover:underline">
+        Anasayfaya dön
+      </Link>
     </div>
   );
 };
