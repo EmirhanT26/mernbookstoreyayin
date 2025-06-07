@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const books = [
   {
@@ -52,7 +53,13 @@ const CategoryPage = () => {
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4">
         {categoryData.items.map((book) => (
           <div key={book.id} className="bg-violet-100 p-4 rounded-md">
-            <img src={book.img} alt={book.name} className="w-full h-48 object-cover mb-2" />
+            <Image
+  src={book.img}
+  alt={book.name}
+  width={200}
+  height={300}
+  className="w-full h-48 object-cover mb-2"
+/>
             <h5 className="text-lg font-bold">{book.name}</h5>
             <p className="text-sm text-gray-700">{book.author}</p>
             <p className="font-bold text-purple-600 mt-2">{book.price} $</p>

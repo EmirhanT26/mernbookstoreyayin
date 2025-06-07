@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { LuX } from "react-icons/lu";
+import Image from 'next/image';
 
 const Checkout = () => {
   const [quantity, setQuantity] = useState(1);
@@ -33,11 +34,11 @@ const Checkout = () => {
         <div className="flex-1">
           <div className="bg-violet-100 rounded-xl p-4 mb-4 flex flex-col md:flex-row items-center relative">
             <LuX className="absolute top-2 right-2 text-2xl text-gray-500 cursor-pointer" />
-            <img 
-              src="images/matilda.png" 
-              alt="Kitap Resmi" 
-              className="w-full md:w-24 h-32 object-cover rounded-md mb-4 md:mb-0" 
-            />
+            <Image
+ src="images/matilda.png" 
+  alt="Kitap Resmi" 
+className="w-full md:w-24 h-32 object-cover rounded-md mb-4 md:mb-0" 
+/>
             <div className="flex-1 ml-0 md:ml-4">
               <h3 className="text-xl font-semibold text-black">Kitap ismi</h3>
               <p className="text-gray-700">Yazarın İsmi</p>

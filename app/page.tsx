@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { Carousel } from "flowbite-react";
 import { books } from "./consts/books";
+import Image from 'next/image';
 
 const Page = () => {
   return (
@@ -11,11 +12,11 @@ const Page = () => {
       <div className="relative mt-6 px-4 sm:px-6 md:px-8 lg:px-10">
         <Carousel>
           <div className="relative">
-            <img
-              src="/images/banner.png"
-              alt="..."
-              className="w-full h-auto sm:h-64 md:h-80 lg:h-96 object-cover"
-            />
+            <Image
+  src="/images/banner.png"
+  alt="Example"
+ className="w-full h-auto sm:h-64 md:h-80 lg:h-96 object-cover"
+/>
             <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-center text-white bg-black bg-opacity-50">
               <div>
                 <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-amber-500">
@@ -29,11 +30,11 @@ const Page = () => {
             </div>
           </div>
           <div className="relative">
-            <img
-              src="/images/banner.png"
-              alt="..."
-              className="w-full h-auto sm:h-64 md:h-80 lg:h-96 object-cover"
-            />
+            <Image
+  src="/images/banner.png"
+  alt="Example"
+   className="w-full h-auto sm:h-64 md:h-80 lg:h-96 object-cover"
+/>
             <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-center text-white bg-black bg-opacity-50">
               <div>
                 <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-amber-500">
@@ -47,11 +48,11 @@ const Page = () => {
             </div>
           </div>
           <div className="relative">
-            <img
-              src="/images/banner.png"
-              alt="..."
-              className="w-full h-auto sm:h-64 md:h-80 lg:h-96 object-cover"
-            />
+            <Image
+  src="/images/banner.png"
+  alt="..."
+ className="w-full h-auto sm:h-64 md:h-80 lg:h-96 object-cover"
+/>
             <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-center text-white bg-black bg-opacity-50">
               <div>
                 <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-amber-500">
@@ -91,11 +92,11 @@ const Page = () => {
                   className="flex flex-col sm:flex-row bg-violet-100 border border-gray-200 rounded-lg overflow-hidden"
                 >
                   <div className="w-full sm:w-1/3">
-                    <img
-                      src={book.img}
-                      alt={book.name}
-                      className="w-full h-full object-cover"
-                    />
+                   <Image
+  src={book.img}
+  alt={book.name}
+ className="w-full h-full object-cover"
+/>
                   </div>
                   <div className="flex flex-col justify-between p-4 sm:w-2/3">
                     <div className="flex flex-col flex-grow">
