@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router';
+import React from 'react';
 import Link from 'next/link';
-
+import { useParams } from 'next/navigation';
 
 const books = [
   {
@@ -33,14 +33,18 @@ const books = [
 ];
 
 const CategoryPage = () => {
-  const router = useRouter();
-  const { category } = router.query;
+  const params = useParams();
+
+  // params.category tipi string | string[] olabilir, bunu güvenli parse ediyoruz
+  const categoryParam = Array.isArray(params.category) 
+    ? decodeURIComponent(params.category[0]) 
+    : decodeURIComponent(params.category || '');
 
   // Kategoriyi bul
-  const categoryData = books.find(cat => cat.category === category);
+  const categoryData = books.find(cat => cat.category === categoryParam);
 
   if (!categoryData) {
-    return <p>Kategori bulunamadı.</p>;
+    return <p className="p-4 text-center text-red-600">Kategori bulunamadı.</p>;
   }
 
   return (
