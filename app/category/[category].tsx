@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { books } from '../consts/books'; 
 import { Book } from '../consts/books';
+import Image from 'next/image';
 
 interface CategoryPageProps {
   category: string;
@@ -22,7 +23,11 @@ export default function CategoryPage({ category, books }: CategoryPageProps) {
             <h2>{book.name}</h2>
             <p>Author: {book.author}</p>
             <p>Price: ${book.price}</p>
-            <img src={book.img} alt={book.name} width="100" />
+            <Image
+  src={book.img}
+  alt={book.name}
+  width="100"
+/>
             <p>{book.description}</p>
           </li>
         ))}
