@@ -1,10 +1,22 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
-const books = [
+type Book = {
+  id: number;
+  name: string;
+  author: string;
+  price: number;
+  img: string;
+};
+
+type Category = {
+  category: string;
+  items: Book[];
+};
+
+const books: Category[] = [
   {
     category: "Best Seller",
     items: [
@@ -19,7 +31,7 @@ const books = [
     items: [
       { id: 1, name: "Romeo Ve Juliet", author: "William Shakespeare", price: 87.75, img: "/images/romeovejuliet.png" },
       { id: 2, name: "Olağan Üstü Bir Gece", author: "Stefan Zweig", price: 35.75, img: "/images/olaganustubirgece.png" },
-      { id: 3, name: "Genç Werther'in Acıları", author: "Goethe", price: 36.00, img: "/images/gencwerther.jpg" },
+      { id: 3, name: "Genç Werther&apos;in Acıları", author: "Goethe", price: 36.00, img: "/images/gencwerther.jpg" },
       { id: 4, name: "Zaman Makinesi", author: "H.G Wells", price: 36.00, img: "/images/zamanmakinesi.png" },
     ],
   },
@@ -36,15 +48,16 @@ const books = [
 
 const CategoryPage = () => {
   const params = useParams();
+  const category = params.category;
 
-  const categoryParam = Array.isArray(params.category)
-    ? decodeURIComponent(params.category[0])
-    : decodeURIComponent(params.category || '');
+  if (typeof category !== 'string') {
+    return <p>Geçersiz kategori.</p>;
+  }
 
-  const categoryData = books.find(cat => cat.category === categoryParam);
+  const categoryData = books.find(cat => cat.category === category);
 
   if (!categoryData) {
-    return <p className="p-4 text-center text-red-600">Kategori bulunamadı.</p>;
+    return <p>Kategori bulunamadı.</p>;
   }
 
   return (
@@ -53,7 +66,13 @@ const CategoryPage = () => {
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4">
         {categoryData.items.map((book) => (
           <div key={book.id} className="bg-violet-100 p-4 rounded-md">
-            <img src={book.img} alt={book.name} className="w-full h-48 object-cover mb-2" />
+            <Image
+              src={book.img}
+              alt={book.name}
+              width={300}
+              height={200}
+              className="mb-2 rounded-md object-cover"
+            />
             <h5 className="text-lg font-bold">{book.name}</h5>
             <p className="text-sm text-gray-700">{book.author}</p>
             <p className="font-bold text-purple-600 mt-2">{book.price} $</p>
